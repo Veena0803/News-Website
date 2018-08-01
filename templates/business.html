@@ -16,10 +16,10 @@
 			   contentType:"application/xml",
 			   success: function(response){
 			   		var xml = $.parseXML(response),
-			   		$response = $( xml ),
+			   		$response = $(xml),
 			   		$title = $response.find("title");
+			   		$(".heading").append($title.text());
 
-			   		$("#someElement").append($title.text()); 
 			   	},
 			   	error: function (result, status, err){
                  //run only the callback without attempting to parse result due to error
@@ -34,6 +34,7 @@
 	<a href="templates/header.html"></a>
 	<h1>Business News</h1>
 
-	<p id = "someElement"></p>
+	<h4 class = "heading"></h4>
+
 </body>
 </html>
