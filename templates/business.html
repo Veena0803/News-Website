@@ -21,7 +21,7 @@
 			   		$titles = $response.find("title");
 			   		$.each($titles, function( title, name ) {
   						if (name.innerHTML != undefined) {
-  							$("<a />", { href:"www.google.com", text: name.innerHTML + "<br/>"}).appendTo("#titles");
+  							$("<a />", { href:"https://www.google.com", text: name.innerHTML}).appendTo("#titles").append("<br/>");
   							//document.getElementById("titles").append("&lt;ul&gt;" + name.innerHTML + "&lt;/ul&gt;<br/>");	
   						}  						
 					});
