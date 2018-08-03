@@ -15,27 +15,19 @@
 			   url: 'https://cors.io/?http://feeds.reuters.com/reuters/businessNews',
 			   contentType:"application/xml",
 			   success: function(response){			   		
+			   		// Printing the response fetched from RSS on to the console
 			   		console.log(response);
+			   		//Parsing the XML response
 			   		var xml = $.parseXML(response),
 			   		$response = $(xml),
+			   		//Fetching each item/news
 			   		$items = $response.find("item");
+			   		//Looping through the result to print each one on a new line
 			   		$.each($items, function( key, value ) {
-  						//if (name.innerHTML != undefined) {
-  							$("<a />", { href: value.childNodes[5].innerHTML, text: value.childNodes[1].innerHTML, target:"_blank"}).appendTo("#items").append("<br/>").append("<br/>");
-  							//document.getElementById("items").append("&lt;ul&gt;" + name.innerHTML + "&lt;/ul&gt;<br/>");	
-  						//}  						
+  							$("<a />", { href: value.childNodes[5].innerHTML, text: value.childNodes[1].innerHTML, target:"_blank"}).appendTo("#items").append("<br/>").append("<br/>");						
 					});
-			   		/*var items = $("#heading").append($title.text());
-			   		displayitems();
-			   		// var items = xml;
-			   		console.log(items);
-			   		function displayitems(){
-			   			var theTitle = document.getElementById("heading").value;
-			   			//console.log(theTitle);
-			   			// items.push(theTitle);
-			   			// document.getElementById("heading").children[0].innerHTML += "<li>"+items[items.length-1]+"</li>";
-			   		}*/
 			   	},
+			   	// In case error occurs
 			   	error: function (result, status, err){
                  //run only the callback without attempting to parse result due to error
                  console.log("Found error")
@@ -51,8 +43,5 @@
 	<h1>Business News</h1>
 	<h4 id = "heading"></h4>
 	<div id="items"><ul></ul></div>
-	<!-- <script type="text/javascript">
-		displayitems();
-	</script> -->
-</body>
+	</body>
 </html>
