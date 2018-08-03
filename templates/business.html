@@ -15,11 +15,26 @@
 			   url: 'https://cors.io/?http://feeds.reuters.com/reuters/businessNews',
 			   contentType:"application/xml",
 			   success: function(response){
+			   		// console.log(response);
 			   		var xml = $.parseXML(response),
 			   		$response = $(xml),
-			   		$title = $response.find("title");
-			   		$(".heading").append($title.text());
-
+			   		$titles = $response.find("title");
+			   		$.each($titles, function( title, name ) {
+  						if (name.innerHTML != undefined) {
+  							$("<a />", { href:"www.google.com", text: name.innerHTML + "<br/>"}).appendTo("#titles");
+  							//document.getElementById("titles").append("&lt;ul&gt;" + name.innerHTML + "&lt;/ul&gt;<br/>");	
+  						}  						
+					});
+			   		/*var titles = $("#heading").append($title.text());
+			   		displaytitles();
+			   		// var titles = xml;
+			   		console.log(titles);
+			   		function displaytitles(){
+			   			var theTitle = document.getElementById("heading").value;
+			   			//console.log(theTitle);
+			   			// titles.push(theTitle);
+			   			// document.getElementById("heading").children[0].innerHTML += "<li>"+titles[titles.length-1]+"</li>";
+			   		}*/
 			   	},
 			   	error: function (result, status, err){
                  //run only the callback without attempting to parse result due to error
@@ -27,14 +42,17 @@
                }
 			  });
 			});
+
 		</script>
 </head>
 <body>
 	<div id="header"></div>
 	<a href="templates/header.html"></a>
 	<h1>Business News</h1>
-
-	<h4 class = "heading"></h4>
-
+	<h4 id = "heading"></h4>
+	<div id="titles"><ul></ul></div>
+	<!-- <script type="text/javascript">
+		displaytitles();
+	</script> -->
 </body>
 </html>
