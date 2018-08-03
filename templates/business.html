@@ -26,11 +26,13 @@
 			   			item = {
 			   				title: value.childNodes[1].innerHTML,
 			   				link: value.childNodes[5].innerHTML,
-			   				description: value.childNodes[3].innerHTML
+			   				description: value.childNodes[3].innerHTML,
+			   				pubDate: value.childNodes[11].innerHTML
 			   			};
 			   			//Printing title & description for each news item
 			   			$("#items").append($("<a />", { text: item.title, target:"_blank", href: item.link}));
-			   			$("#items").append($('<p>').text(item.description.substring(0, 100) + "..."));
+			   			$("#items").append($('<p>').text(item.description.substring(0, 180) + "..."));
+			   			$("#items").append($('<p>').text(item.pubDate));
 			   		});
 			   	},
 			   	// In case of error
