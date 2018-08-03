@@ -14,26 +14,26 @@
 			   type: "GET",
 			   url: 'https://cors.io/?http://feeds.reuters.com/reuters/businessNews',
 			   contentType:"application/xml",
-			   success: function(response){
-			   		// console.log(response);
+			   success: function(response){			   		
+			   		console.log(response);
 			   		var xml = $.parseXML(response),
 			   		$response = $(xml),
-			   		$titles = $response.find("title");
-			   		$.each($titles, function( title, name ) {
-  						if (name.innerHTML != undefined) {
-  							$("<a />", { href:"https://www.google.com", text: name.innerHTML}).appendTo("#titles").append("<br/>");
-  							//document.getElementById("titles").append("&lt;ul&gt;" + name.innerHTML + "&lt;/ul&gt;<br/>");	
-  						}  						
+			   		$items = $response.find("item");
+			   		$.each($items, function( key, value ) {
+  						//if (name.innerHTML != undefined) {
+  							$("<a />", { href: value.childNodes[5].innerHTML, text: value.childNodes[1].innerHTML, target:"_blank"}).appendTo("#items").append("<br/>").append("<br/>");
+  							//document.getElementById("items").append("&lt;ul&gt;" + name.innerHTML + "&lt;/ul&gt;<br/>");	
+  						//}  						
 					});
-			   		/*var titles = $("#heading").append($title.text());
-			   		displaytitles();
-			   		// var titles = xml;
-			   		console.log(titles);
-			   		function displaytitles(){
+			   		/*var items = $("#heading").append($title.text());
+			   		displayitems();
+			   		// var items = xml;
+			   		console.log(items);
+			   		function displayitems(){
 			   			var theTitle = document.getElementById("heading").value;
 			   			//console.log(theTitle);
-			   			// titles.push(theTitle);
-			   			// document.getElementById("heading").children[0].innerHTML += "<li>"+titles[titles.length-1]+"</li>";
+			   			// items.push(theTitle);
+			   			// document.getElementById("heading").children[0].innerHTML += "<li>"+items[items.length-1]+"</li>";
 			   		}*/
 			   	},
 			   	error: function (result, status, err){
@@ -50,9 +50,9 @@
 	<a href="templates/header.html"></a>
 	<h1>Business News</h1>
 	<h4 id = "heading"></h4>
-	<div id="titles"><ul></ul></div>
+	<div id="items"><ul></ul></div>
 	<!-- <script type="text/javascript">
-		displaytitles();
+		displayitems();
 	</script> -->
 </body>
 </html>
