@@ -6,9 +6,40 @@
 	<title>News Website</title>
 	<link rel="stylesheet" href="/NewsWebsite/css/styles.css">
 	<script type = "text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script> 
+		<script>
 			$(function(){
-			  $("#header").load("header.html"); 
+			  $("#header").load("header.html");
+			});
+			$.ajax({
+			 type: "GET",
+			 url: 'https://cors.io/?http://feeds.reuters.com/reuters/sportsNews',
+			 contentType:"application/xml",
+			 success: function(response){
+					console.log(response);
+					// Printing the response fetched from RSS on to the console
+
+					//Parsing the XML response
+					var xml = $.parseXML(response),
+					$response = $(xml);
+					$response.find("item").each(function(item, value){
+						var $this = value,
+						item = {
+							title: value.childNodes[1].innerHTML,
+							link: value.childNodes[5].innerHTML,
+							description: value.childNodes[3].innerHTML,
+							pubDate: value.childNodes[11].innerHTML
+						};
+						//Printing title & description for each news item
+						$("#items").append($("<a />", { text: item.title, target:"_blank", href: item.link}));
+						$("#items").append($('<p>').text(item.description.substring(0, 180) + "..."));
+						$("#items").append($('<p>').text(item.pubDate));
+					});
+				},
+				// In case of error
+				error: function (result, status, err){
+							 //run only the callback without attempting to parse result due to error
+							 console.log("Found error")
+						 }
 			});
 		</script>
 </head>
@@ -16,5 +47,7 @@
 	<div id="header"></div>
 	<a href="templates/header.html"></a>
 	<h1>Sports</h1>
+	<h4 id = "heading"></h4>
+	<div id="items"><ul></ul></div>
 </body>
 </html>
