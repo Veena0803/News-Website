@@ -12,7 +12,7 @@
 			});
 			$.ajax({
 			 type: "GET",
-			 url: 'https://cors.io/?http://feeds.reuters.com/reuters/PoliticsNews',
+			 url: 'https://cors.io/?http://feeds.reuters.com/reuters/domesticNews',
 			 contentType:"application/xml",
 			 success: function(response){
 					console.log(response);
@@ -41,12 +41,13 @@
 							 console.log("Found error")
 						 }
 			});
+
 		</script>
 </head>
 <body>
 	<div id="header"></div>
 	<a href="templates/header.html"></a>
-	<h1>World News</h1>
+	<h1>US News</h1>
 	<h4 id = "heading"></h4>
 	<div id="items"><ul></ul></div>
 </body>
